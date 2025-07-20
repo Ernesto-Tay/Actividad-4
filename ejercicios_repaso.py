@@ -275,5 +275,46 @@ if signo_1 != signo_2:
             print("Debe ir hacia el suroeste")
 
 
+print("\n\nEjercicio 9")
+peliculas = [{"Nombre":"el deslenguado", "Edad":17},{"Nombre": "Tras la muerte", "Edad": 14},{"Nombre": "David de la granja", "Edad":9},{"Nombre":"El rey carmesí", "Edad":16},{"Nombre":"Alba futura", "Edad":12}]
+edad_est = int(input("\nIngrese su edad: "))
+dia_sem = input("\nIngrese el día de la semana actual: ").lower()
+est = input("\n¿Es estudiante? (si/no): ").lower()
+
+print("\n"+"--"*5 + "CARTELERA" + "--"*5)
+print("Nombre".ljust(25) + "Edad".ljust(10))
+for pelicula in peliculas:
+    print(f"{pelicula}. " + pelicula["Nombre"].ljust(25) + pelicula["Edad"].ljust(10))
+
+while True:
+    peli_select = input("\nIngrese la opción que desea ver: ")
+    if peli_select <=0 or peli_select > peliculas.len():
+        print("Opción inexistente")
+    else:
+        selected_peli = peliculas[peli_select]["Nombre"]
+        break
+
+permiso = True
+dos_por_uno = False
+precio_base = 50
+if est == "si":
+    precio_base=35
+
+if dia_sem == "miercoles" or dia_sem == "miércoles":
+     dos_por_uno = True
+
+if edad <= 13:
+    if peliculas[peli_select]["edad"] >= 15:
+        permiso = False
+
+if permiso:
+    if dos_por_uno:
+        print(f"Precio final: {precio_base/2} (Oferta 2x1)")
+    else:
+        print(f"Precio final: {precio_base}")
+else:
+    print("No tienes permiso para ver esa película.")
+
+
 
 
