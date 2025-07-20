@@ -58,5 +58,25 @@ else:
 print(f"\nImpuesto total: {impuesto_total}")
 
 
+print("\n\nEjercicio 3")
+usuarios=[{"Usuario":"Ignacio", "Contraseña":"wasd"},{"Usuario":"Juanito","Contraseña":"tamalito123"},{"Usuario":"Polonio","Contraseña":"qwerty"}]
+intentos = 3
+while intentos>0:
+    usuario = input("\nIngrese su usuario: ")
+    contra = input("\nIngrese su contraseña: ")
+    for i in usuarios:
+        if i["Usuario"] == usuario and i["Contraseña"] == contra:
+            print(f"\nBienvenido, {usuario}")
+            print("\n" + "-"*5 + "MENÚ DE OPCIONES" + "-"*5)
+            print("1. Ver perfil\n2. Cambiar Contraseña\n3. Cerrar sesión")
+
+        else:
+            intentos-=1
+            print("Usuario o contraseña inválidos.")
+
+if intentos==0:
+    print("\nACCESO BLOQUEADO")
+
+
 
 
