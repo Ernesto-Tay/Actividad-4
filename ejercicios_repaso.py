@@ -151,7 +151,7 @@ print("\n\nEjercicio 6")
 peso = float(input("\nIngrese el peso del paquete: "))
 distancia = int(input("\nIngrese la distancia del viaje (en km): "))
 urgencia = input("\n¿Es urgente el envío?: ").lower()
-tamaño = input("\n ¿su paquete es pequeño, mediano o grande?: ").lower()
+tamano = input("\n ¿su paquete es pequeño, mediano o grande?: ").lower()
 
 costo_peso = peso*1.5
 costo_distancia = distancia/2
@@ -160,14 +160,14 @@ if urgencia == "si":
 else:
     costo_urgencia = 0
 
-if tamaño == "grande":
-    costo_tamaño = 30
+if tamano == "grande":
+    costo_tamano = 30
 else:
-    costo_tamaño = 0
+    costo_tamano = 0
 
-total = costo_peso+costo_distancia+costo_urgencia+costo_tamaño
+total = costo_peso+costo_distancia+costo_urgencia+costo_tamano
 
-print(f"\nDesglose de costo: \nPeso: +Q{costo_peso}\nDistancia: +Q{costo_distancia}\nUrgencia: +Q{costo_urgencia}\nTamaño: +Q{costo_tamaño}\nTOTAL: Q{total}")
+print(f"\nDesglose de costo: \nPeso: +Q{costo_peso}\nDistancia: +Q{costo_distancia}\nUrgencia: +Q{costo_urgencia}\nTamaño: +Q{costo_tamano}\nTOTAL: Q{total}")
 
 
 print("\n\nEjercicio 7")
@@ -196,7 +196,6 @@ for i in range(5):
     promedio = (nota1+nota2+nota3)/3
     promedios.append(promedio)
 
-
     notas = {"nota 1": nota1, "nota 2": nota2, "nota 3": nota3,}
     estudiante = {"nombre": nombre,"notas": notas}
     estudiantes.append(estudiante)
@@ -221,6 +220,59 @@ for i in estudiantes:
     print(f"Nota 3: {i['notas']['nota 3']}")
     print("..."*10 + "\n")
 
+
+print("\n\nEjercicio 8")
+coordenadas = [{"Coordenada":"norte", "Eje":1, "Signo":"+"}, {"Coordenada":"sur", "Eje":1, "Signo":"-"}, {"Coordenada":"este", "Eje":2, "Signo":"+"}, {"Coordenada":"oeste", "Eje":2,"Signo":"-"}]
+while True:
+    coord_1 = input("\nIngrese la coordenada inicial: ").lower()
+    coord_2 = input("\nIngrese la coordenada final: ").lower()
+    coord_names = [i["Coordenada"] for i in coordenadas]
+
+    if coord_1 == coord_2:
+        print("Las coordenadas deben ser distintas")
+    elif coord_1 not in coord_names:
+        print("Coordenada inicial inválida")
+    elif coord_2 not in coord_names:
+        print("Coordenada final inválida")
+    else:
+        break
+
+for i in coordenadas:
+    if i["Coordenada"] == coord_1:
+        eje_1 = i["Eje"]
+        signo_1 = i["Signo"]
+
+    if i["Coordenada"] == coord_2:
+        eje_2 = i["Eje"]
+        signo_2 = i["Signo"]
+
+if eje_1 == eje_2:
+    print(f"Debe ir recto hacia el {coord_2}")
+if signo_1 == signo_2:
+    if signo_1 == "+":
+        if eje_1 == 1:
+            print("Debe ir hacia el sureste")
+        elif eje_1 == 2:
+            print("Debe ir hacia el noroeste")
+
+    if signo_1 == "-":
+        if eje_1 == 1:
+            print("Debe ir hacia el noroeste")
+        elif eje_1 == 2:
+            print("Debe ir hacia el sureste")
+
+if signo_1 != signo_2:
+    if signo_1 == "+":
+        if eje_1 == 1:
+            print("Debe ir hacia el suroeste")
+        elif eje_1 == 2:
+            print("Debe ir hacia el noreste")
+
+    if signo_1 == "-":
+        if eje_1 == 1:
+            print("Debe ir hacia el noreste")
+        elif eje_1 == 2:
+            print("Debe ir hacia el suroeste")
 
 
 
