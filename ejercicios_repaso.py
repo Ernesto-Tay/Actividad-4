@@ -23,7 +23,7 @@ for depto_ in deptos:
         print("El departamento ingresado es inválido")
         Depto=False
 
-edad = input("\nIngrese su año de nacimiento: ")
+edad = int(input("\nIngrese su edad: "))
 if edad>=18:
     voto=True
 elif edad>=17 and depto == "petén" or edad>=17 and depto == "alta verapaz":
@@ -104,3 +104,124 @@ IVA = round(IVA,2)
 total=subtotal+propina+IVA-tarjeta
 
 print(f"\nDatos de su compra:\nSubtotal: Q{subtotal}\nIVA: Q{IVA}\nPropina: Q{propina}\nDescuento: Q{tarjeta}\nTotal: Q{total}")
+
+
+print("\n\nEjercicio 5")
+meses = [{"mes":"marzo","dias":31},{"mes":"abril","dias":30} ,{"mes":"mayo","dias":31} ,{"mes":"junio","dias":30},{"mes":"julio","dias":31},{"mes":"agosto","dias":31},{"mes":"septiembre","dias":30},{"mes":"octubre","dias":31},{"mes":"noviembre","dias":30},{"mes":"diciembre","dias":31},{"mes":"enero","dias":30},{"mes":"febrero","dias":28}]
+dias = ["Sábado","Domingo","Lunes","Martes","Miércoles","Jueves","Viernes"]
+while True:
+    ano = int(input("\nIngrese el año: "))
+    if ano<1:
+        print("Año inválido, intente nuevamente")
+    else:
+        break
+
+while True:
+    mes = input("\nIngrese el nombre del mes: ").lower()
+    meses_name = [m["mes"] for m in meses]
+    if mes not in meses_name:
+        print("Mes inválido, intente nuevamente")
+    else:
+        break
+
+for mess in meses:
+    if mess["mes"]==mes:
+        max_dias = mess["dias"]
+        mes_num=meses.index(mess)+3
+        if mes_num==13 or mes_num==14:
+            ano-=1
+
+while True:
+    dia = int(input("\nIngrese el dia: "))
+    if dia<=0 or dia >max_dias:
+        print("Ingrese un número de día válido")
+    else:
+        break
+
+siglo = ano//100
+decada = ano%100
+
+formula = (dia + (13*(mes_num+1))//5 + decada + (decada//4) + (siglo//4) + siglo*5)%7
+diasem = dias[formula]
+
+print(f"\nEl {dia} de {mes} del {ano} fue un: {diasem}")
+
+
+print("\n\nEjercicio 6")
+peso = float(input("\nIngrese el peso del paquete: "))
+distancia = int(input("\nIngrese la distancia del viaje (en km): "))
+urgencia = input("\n¿Es urgente el envío?: ").lower()
+tamaño = input("\n ¿su paquete es pequeño, mediano o grande?: ").lower()
+
+costo_peso = peso*1.5
+costo_distancia = distancia/2
+if urgencia == "si":
+    costo_urgencia = 50
+else:
+    costo_urgencia = 0
+
+if tamaño == "grande":
+    costo_tamaño = 30
+else:
+    costo_tamaño = 0
+
+total = costo_peso+costo_distancia+costo_urgencia+costo_tamaño
+
+print(f"\nDesglose de costo: \nPeso: +Q{costo_peso}\nDistancia: +Q{costo_distancia}\nUrgencia: +Q{costo_urgencia}\nTamaño: +Q{costo_tamaño}\nTOTAL: Q{total}")
+
+
+print("\n\nEjercicio 7")
+estudiantes = []
+promedios = []
+for i in range(5):
+    nombre = input(f"\nIngrese el nombre del estudiante {i}: ")
+    while True:
+        nota1 = int(input("\nIngrese su primer nota: "))
+        if nota1<0 or nota1>100:
+            print("Ingrese una nota válida (del 0 al 100")
+        else:
+            break
+    while True:
+        nota2 = int(input("\nIngrese su segunda nota: "))
+        if nota2<0 or nota2>100:
+            print("Ingrese una nota válida (del 0 al 100")
+        else:
+            break
+    while True:
+        nota3 = int(input("\nIngrese su tercera nota: "))
+        if nota3<0 or nota3>100:
+            print("Ingrese una nota válida (del 0 al 100")
+        else:
+            break
+    promedio = (nota1+nota2+nota3)/3
+    promedios.append(promedio)
+
+
+    notas = {"nota 1": nota1, "nota 2": nota2, "nota 3": nota3,}
+    estudiante = {"nombre": nombre,"notas": notas}
+    estudiantes.append(estudiante)
+
+curva = True
+for i in promedios:
+    if i > 70:
+        curva = False
+
+if curva:
+    for i in estudiantes:
+        for nota in i["notas"]:
+            if nota<=95:
+                nota += 5
+
+print("--"*5 + "LISTA DE ESTUDIANTES" + "--"*5)
+for i in estudiantes:
+    print(".."*5 + f"ESTUDIANTE {i}" + ".."*5)
+    print(f"Nombre: {i['nombre']}")
+    print(f"Nota 1: {i['notas']['nota 1']}")
+    print(f"Nota 2: {i['notas']['nota 2']}")
+    print(f"Nota 3: {i['notas']['nota 3']}")
+    print("..."*10 + "\n")
+
+
+
+
+
