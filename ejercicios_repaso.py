@@ -78,4 +78,29 @@ if intentos==0:
     print("\nACCESO BLOQUEADO")
 
 
+print("\n\nEjercicio 4")
+cant = int(input("\n¿Cuántos productos va a ingresar?: "))
+subtotal = 0
+for i in range(cant):
+    precio = int(input("\nIngrese el precio de su producto: "))
+    subtotal+=precio
 
+propina_confirm = input("¿Desea dejar propina?: ").lower()
+if propina_confirm == "no":
+    propina = 0
+elif propina_confirm == "si":
+    propina_percent = int(input("\nIngrese el porcentaje de su propina: "))
+    propina =  subtotal*(propina_percent/100)
+    propina = round(propina,2)
+
+tarjeta_confirm = input("\n¿Tiene tarjeta de cliente frecuente?: ").lower()
+if tarjeta_confirm == "no":
+    tarjeta = 0
+elif tarjeta_confirm == "si":
+    tarjeta = subtotal/10
+
+IVA = (subtotal/100)*12
+IVA = round(IVA,2)
+total=subtotal+propina+IVA-tarjeta
+
+print(f"\nDatos de su compra:\nSubtotal: Q{subtotal}\nIVA: Q{IVA}\nPropina: Q{propina}\nDescuento: Q{tarjeta}\nTotal: Q{total}")
