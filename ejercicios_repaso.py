@@ -2,14 +2,14 @@ print("Ejercicio 1")
 deptos = ["Alta Verapaz","Baja Verapaz","Chimaltenango","Chiquimula","Guatemala","El Progreso","Escuintla","Huehuetenango","Izabal","Jalapa","Jutiapa","Peten","Quetzaltenango","Quiché","Retalhuleu","Sacatepequez","San Marcos","Santa Rosa","Sololá","Suchitepequez","Totonicapán","Zacapa"]
 
 nombre=input("\nIngrese su nombre: ")
-if nombre.len()<5:
+if len(nombre)<5:
     print("El nombre debe ser mayor a 5 caracteres")
     name=False
 else:
     name=True
 
 DPI = int(input("\nIngrese su DPI: "))
-if DPI<13:
+if len(str(DPI))<13:
     print("DPI inválido")
     dpi=False
 else:
@@ -17,16 +17,18 @@ else:
 
 depto = input("\nIngrese su departamento: ").lower()
 for depto_ in deptos:
-    if depto_.lower==depto:
-        Depto=True
+    if depto_.lower() != depto:
+        Depto = False
     else:
-        print("El departamento ingresado es inválido")
-        Depto=False
+        Depto = True
+        break
+if not Depto:
+    print("Departamento inválido")
 
 edad = int(input("\nIngrese su edad: "))
 if edad>=18:
     voto=True
-elif edad>=17 and depto == "petén" or edad>=17 and depto == "alta verapaz":
+elif edad>=17 and depto in ["petén", "alta verapaz"]:
     voto=True
 else:
     voto=False
@@ -47,7 +49,7 @@ elif 60000<ingreso_anual<=100000:
     impuesto=(ingreso_anual/100)*15
 elif ingreso_anual>100000:
     impuesto=(ingreso_anual/100)*20
-elif ingreso_anual<40000 and dependientes>2:
+if ingreso_anual<40000 and dependientes>2:
     impuesto=0
 
 if impuesto>0:
@@ -64,12 +66,16 @@ intentos = 3
 while intentos>0:
     usuario = input("\nIngrese su usuario: ")
     contra = input("\nIngrese su contraseña: ")
+    correcto = False
     for i in usuarios:
         if i["Usuario"] == usuario and i["Contraseña"] == contra:
+            correcto = True
             print(f"\nBienvenido, {usuario}")
             print("\n" + "-"*5 + "MENÚ DE OPCIONES" + "-"*5)
             print("1. Ver perfil\n2. Cambiar Contraseña\n3. Cerrar sesión")
 
+        if correcto:
+            break
         else:
             intentos-=1
             print("Usuario o contraseña inválidos.")
@@ -210,6 +216,8 @@ if curva:
         for nota in i["notas"]:
             if nota<=95:
                 nota += 5
+            else:
+                nota = 100
 
 print("--"*5 + "LISTA DE ESTUDIANTES" + "--"*5)
 for i in estudiantes:
@@ -284,11 +292,11 @@ est = input("\n¿Es estudiante? (si/no): ").lower()
 print("\n"+"--"*5 + "CARTELERA" + "--"*5)
 print("Nombre".ljust(25) + "Edad".ljust(10))
 for pelicula in peliculas:
-    print(f"{pelicula}. " + pelicula["Nombre"].ljust(25) + pelicula["Edad"].ljust(10))
+    print(f"{pelicula}. " + pelicula["Nombre"].ljust(25) + str(pelicula["Edad"]).ljust(10))
 
 while True:
-    peli_select = input("\nIngrese la opción que desea ver: ")
-    if peli_select <=0 or peli_select > peliculas.len():
+    peli_select = int(input("\nIngrese el número de la opción que desea ver: "))
+    if peli_select <=0 or peli_select > len(peliculas):
         print("Opción inexistente")
     else:
         selected_peli = peliculas[peli_select]["Nombre"]
@@ -303,7 +311,7 @@ if est == "si":
 if dia_sem == "miercoles" or dia_sem == "miércoles":
      dos_por_uno = True
 
-if edad <= 13:
+if edad_est <= 13:
     if peliculas[peli_select]["edad"] >= 15:
         permiso = False
 
