@@ -316,5 +316,99 @@ else:
     print("No tienes permiso para ver esa película.")
 
 
+import re
+print("\n\nEjercicio 10")
+meses_2 = [{"mes":1,"dias":30},{"mes":2,"dias":28},{"mes":3,"dias":31},{"mes":4,"dias":30} ,{"mes":5,"dias":31} ,{"mes":6,"dias":30},{"mes":7,"dias":31},{"mes":8,"dias":31},{"mes":9,"dias":30},{"mes":10,"dias":31},{"mes":11,"dias":30},{"mes":12,"dias":31}]
+
+while True:
+    fecha_1 = input("\nIngrese la fecha 1 (dd mm aaaa):")
+    fecha_2 = input("\nIngrese la fecha 2 (dd mm aaaa):")
+    letras_1 = re.search('[A-Za-z]',fecha_1)
+    letras_2 = re.search('[A-Za-z]',fecha_2)
+    if fecha_1 == fecha_2:
+        print("Las fechas deben ser distintas")
+
+    if letras_1 or letras_2:
+        print("Escribir las fechas solamente con números separados por espacios.")
+    else:
+        numeros_1 = fecha_1.split()
+        numeros_1 = [int(i) for i in numeros_1]
+        numeros_2 = fecha_2.split()
+        numeros_2 = [int(i) for i in numeros_2]
+
+        if numeros_1[1]>12 or numeros_1[1]<1 or numeros_2[1]>12 or numeros_2[1]<1:
+            print("El mes no puede ser 0 o mayor a 12")
+        else:
+            mes1_select = numeros_1[1]
+            mes2_select = numeros_2[1]
+            for i in meses_2:
+                if mes1_select == i["mes"]:
+                    max_dias1 = i["dias"]
+                elif mes2_select == i["mes"]:
+                    max_dias2 = i["dias"]
+
+            if numeros_1[0]>max_dias1 or numeros_1[0]<1 or numeros_2[0]>max_dias2 or numeros_2[0]<1:
+                print("Cantidad de días incorrecta en alguna de las 2 fechas")
+            elif numeros_1[2] > numeros_2[2]:
+                print("La fecha 1 es mayor a la fecha 2")
+                mismo_ano = False
+            elif numeros_2[2] > numeros_1[2]:
+                print("La fecha 2 es mayor a la fecha 1")
+                mismo_ano = False
+            else:
+                mismo_ano = True
+                if numeros_1[1] > numeros_2[1]:
+                    print("La fecha 1 es mayor a la fecha 2")
+                    mismo_mes = False
+                elif numeros_2[1] > numeros_1[1]:
+                    print("La fecha 2 es mayor a la fecha 1")
+                    mismo_mes = False
+                else:
+                    mismo_mes = True
+                    if numeros_1[0] > numeros_2[0]:
+                        print ("La fecha 1 es mayor a la fecha 2")
+                    elif numeros_2[0] > numeros_1[0]:
+                        print("La fecha 2 es mayor a la fecha 1")
+
+                if mismo_ano:
+                    print("Ambas fechas son del mismo año")
+                    break
+                if mismo_mes:
+                    print("Ambas fechas son del mismo mes")
+                    break
+                else:
+                    break
+
+dias_f1 = 0
+for año in range(0,numeros_1[2]):
+    dias_f1 += 365
+    if año%4==0 and año%100!=0 or año%400==0:
+        dias_f1 += 1
+
+for i in range(0, numeros_1[1]-1):
+    if i==1 and (numeros_1[2]%4==0 and numeros_1[1]%100!=0 or numeros_1[1]%400==0):
+        dias_f1 += 29
+    else:
+        dias_f1 += meses_2[i]["dias"]
+
+dias_f1 += numeros_1[0]
+
+dias_f2 = 0
+for año in range(0, numeros_2[2]):
+    dias_f2 += 365
+    if año%4==0 and año%100!=0 or año%400==0:
+        dias_f2 += 1
+
+for i in range(0, numeros_2[1]-1):
+    if i==1 and (numeros_2[2]%4==0 and numeros_2[1]%100!=0 or numeros_2[1]%400==0):
+        dias_f2 += 29
+    else:
+        dias_f2 += meses_2[i]["dias"]
+
+dias_f2 += numeros_2[0]
+
+dif_total = abs(dias_f1-dias_f2)
+print(f"La diferencia entre ambas fechas es de {dif_total} días")
+
 
 
